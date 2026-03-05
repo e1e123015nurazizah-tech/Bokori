@@ -1,0 +1,105 @@
+/* --- 1. RESET & FONT DASAR --- */
+html, body, [class*="css"] {
+    font-family: 'Arial', sans-serif;
+}
+
+/* --- 2. KONTEN UTAMA & JUDUL --- */
+h1 {
+    color: #283593 !important;
+    font-weight: 800 !important;
+    margin-top: 10px !important; 
+}
+
+.interval-text {
+    color: #c62828;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 16px;
+    border-bottom: 2px solid #283593;
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+}
+
+/* --- 3. KARTU METRIK KREATIF (KPI CARDS) --- */
+div[data-testid="stMetric"] {
+    background-color: #ffffff !important;
+    border: 1px solid #eeeeee !important;
+    border-radius: 15px !important;
+    padding: 20px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    text-align: center !important;
+    transition: transform 0.3s ease !important;
+}
+
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-5px) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+}
+
+div[data-testid="stMetricLabel"] > div {
+    color: #5c6bc0 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+}
+
+div[data-testid="stMetricValue"] > div {
+    color: #283593 !important;
+    font-weight: 800 !important;
+    font-size: 40px !important;
+}
+
+/* --- 1. RESET SIDEBAR (KEMBALI KE PUTIH BERSIH) --- */
+[data-testid="stSidebar"] {
+    background-color: #ffffff !important;
+    border-right: 1px solid #f0f0f0;
+}
+
+/* 2. SEMBUNYIKAN BULATAN RADIO MERAH & LABEL ASLI --- */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] input[type="radio"],
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label span:first-child {
+    display: none !important;
+    width: 0px !important;
+    margin: 0px !important;
+}
+
+[data-testid="stSidebar"] .stRadio [data-testid="stWidgetLabel"] {
+    display: none !important;
+}
+
+/* --- 3. GAYA KAPSUL PANJANG & RATA KIRI --- */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] {
+    gap: 12px !important;
+    padding: 10px 15px !important;
+}
+
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important; /* MENTOK KE KIRI */
+    background-color: #ffffff !important; /* Latar tombol default putih */
+    border-radius: 30px !important;
+    padding: 12px 25px !important;
+    margin: 0px !important;
+    width: 100% !important; 
+    color: #444 !important;
+    font-weight: 600 !important;
+    font-size: 14px !important;
+    cursor: pointer !important;
+    border: 1px solid #f0f0f0 !important;
+    transition: all 0.2s ease-in-out;
+}
+
+/* --- 4. KUNCI UTAMA: WARNA BIRU SAAT DIPILIH --- */
+/* Target spesifik saat atribut data-checked adalah true */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] div[data-checked="true"] > label {
+    background-color: #283593 !important; /* BIRU NAVY MEWAH */
+    color: #ffffff !important; /* Teks jadi putih agar terbaca */
+    border: none !important;
+    box-shadow: 0 4px 12px rgba(40, 53, 147, 0.3) !important;
+}
+
+/* Efek Hover (Saat kursor lewat) */
+[data-testid="stSidebar"] .stRadio label:hover {
+    background-color: #f8f9fa !important;
+    border-color: #283593 !important;
+}
