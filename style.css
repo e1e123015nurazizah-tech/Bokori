@@ -20,49 +20,70 @@ h1 {
     margin-bottom: 30px;
 }
 
-/* --- 3. KARTU METRIK KREATIF (KPI CARDS) --- */
+/* --- KARTU METRIK (KPI CARDS) TAMPILAN TENGAH & BISA BERGERAK --- */
 div[data-testid="stMetric"] {
     background-color: #ffffff !important;
     border: 1px solid #eeeeee !important;
-    border-radius: 15px !important;
+    border-radius: 12px !important;
     padding: 20px !important;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05) !important;
+    
+    /* Pengaturan untuk Rata Tengah */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important; 
+    justify-content: center !important;
     text-align: center !important;
-    transition: transform 0.3s ease !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
 }
 
+/* --- EFEK HOVER (KARTU NAIK SAAT DISENTUH KURSOR) --- */
 div[data-testid="stMetric"]:hover {
-    transform: translateY(-5px) !important;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    transform: translateY(-7px) !important; 
+    box-shadow: 0 10px 25px rgba(40, 53, 147, 0.15) !important; 
 }
 
+/* Memaksa area Judul (Label) mentok ke tengah */
+div[data-testid="stMetricLabel"] {
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/* Gaya Judul (Label) */
 div[data-testid="stMetricLabel"] > div {
     color: #5c6bc0 !important;
     font-weight: 600 !important;
-    font-size: 14px !important;
+    font-size: 13px !important;
+    text-align: center !important;
 }
 
+/* Memaksa area Angka (Value) mentok ke tengah */
+div[data-testid="stMetricValue"] {
+    justify-content: center !important;
+    width: 100% !important;
+}
+
+/* Gaya Angka (Value) */
 div[data-testid="stMetricValue"] > div {
     color: #283593 !important;
     font-weight: 800 !important;
     font-size: 40px !important;
+    text-align: center !important;
 }
 
-/* --- 1. RESET SIDEBAR (KEMBALI KE PUTIH BERSIH) --- */
+/* --- 1. RESET SIDEBAR --- */
 [data-testid="stSidebar"] {
     background-color: #ffffff !important;
     border-right: 1px solid #f0f0f0;
 }
 
-/* 2. SEMBUNYIKAN BULATAN RADIO MERAH & LABEL ASLI --- */
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] input[type="radio"],
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label span:first-child {
+/* --- 2. SEMBUNYIKAN JUDUL MENU & BULATAN RADIO MERAH --- */
+[data-testid="stSidebar"] .stRadio [data-testid="stWidgetLabel"] {
     display: none !important;
-    width: 0px !important;
-    margin: 0px !important;
 }
 
-[data-testid="stSidebar"] .stRadio [data-testid="stWidgetLabel"] {
+/* Membunuh paksa elemen bulatan radio bawaan Streamlit */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label > div:first-child {
     display: none !important;
 }
 
@@ -75,8 +96,8 @@ div[data-testid="stMetricValue"] > div {
 [data-testid="stSidebar"] .stRadio div[role="radiogroup"] label {
     display: flex !important;
     align-items: center !important;
-    justify-content: flex-start !important; /* MENTOK KE KIRI */
-    background-color: #ffffff !important; /* Latar tombol default putih */
+    justify-content: flex-start !important; 
+    background-color: #ffffff !important; 
     border-radius: 30px !important;
     padding: 12px 25px !important;
     margin: 0px !important;
@@ -89,17 +110,44 @@ div[data-testid="stMetricValue"] > div {
     transition: all 0.2s ease-in-out;
 }
 
-/* --- 4. KUNCI UTAMA: WARNA BIRU SAAT DIPILIH --- */
-/* Target spesifik saat atribut data-checked adalah true */
-[data-testid="stSidebar"] .stRadio div[role="radiogroup"] div[data-checked="true"] > label {
-    background-color: #283593 !important; /* BIRU NAVY MEWAH */
-    color: #ffffff !important; /* Teks jadi putih agar terbaca */
-    border: none !important;
+/* --- 4. KUNCI SAKTI: WARNA BIRU SAAT DIPILIH --- */
+/* Menggunakan :has(input:checked) adalah cara paling absolut untuk menargetkan menu aktif */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked),
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label[aria-checked="true"] {
+    background-color: #283593 !important; /* Biru Navy KPPN */
+    border-color: #283593 !important;
     box-shadow: 0 4px 12px rgba(40, 53, 147, 0.3) !important;
 }
 
-/* Efek Hover (Saat kursor lewat) */
-[data-testid="stSidebar"] .stRadio label:hover {
-    background-color: #f8f9fa !important;
+/* Paksa semua teks di dalam kapsul yang aktif menjadi warna putih */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked) *,
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label[aria-checked="true"] * {
+    color: #ffffff !important;
+}
+
+/* --- 5. EFEK HOVER (WARNA BIRU TIPIS SAAT KURSOR LEWAT) --- */
+/* Memberikan latar biru sangat muda (Google Blue) saat kursor lewat */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover {
+    background-color: #e8f0fe !important; 
+    border-color: #a8c7fa !important;     
+    transform: translateX(3px) !important; 
+}
+
+/* Mengubah warna teks menjadi biru agak terang saat dilewati kursor */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:hover * {
+    color: #1967d2 !important; 
+}
+
+/* --- PERLINDUNGAN TOMBOL AKTIF --- */
+/* Mencegah tombol yang SUDAH AKTIF (Biru Tua) ikut berubah pudar saat kursor lewat di atasnya */
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked):hover,
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label[aria-checked="true"]:hover {
+    background-color: #283593 !important;
     border-color: #283593 !important;
+    transform: none !important; 
+}
+
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label:has(input:checked):hover *,
+[data-testid="stSidebar"] .stRadio div[role="radiogroup"] label[aria-checked="true"]:hover * {
+    color: #ffffff !important; 
 }
